@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: config-server
+#  profiles:
+#    active: native
+  cloud:
+    config:
+      server:
+
+        #        native:
+#          search-locations: classpath:/config
+        git:
+          uri: https://hakime1-admin@bitbucket.org/hakime1/configuration.git
+          username: hakime1-admin
+          password: G53WWsKqEpZYSW2PwSc9
+
+server:
+  port: 8181
