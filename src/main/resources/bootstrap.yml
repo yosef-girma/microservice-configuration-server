@@ -1,18 +1,27 @@
+
 spring:
   application:
     name: config-server
-#  profiles:
-#    active: native
+  profiles:
+    active: vault
   cloud:
     config:
       server:
-
+        vault:
+          port: 8200
+          host: 127.0.0.1
+          scheme: http
+          authentication: TOKEN
+          token: myroot
+          kv-version: 2
+          backend: licensing-service
         #        native:
 #          search-locations: classpath:/config
-        git:
-          uri: https://hakime1-admin@bitbucket.org/hakime1/configuration.git
-          username: hakime1-admin
-          password: G53WWsKqEpZYSW2PwSc9
+#        git:
+
+#          uri: https://hakime1-admin@bitbucket.org/hakime1/configuration.git
+#          username: hakime1-admin
+#          password: G53WWsKqEpZYSW2PwSc9
 
 server:
   port: 8181
