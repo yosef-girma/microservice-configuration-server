@@ -18,10 +18,10 @@ spring:
         #        native:
 #          search-locations: classpath:/config
         git:
-          uri: https://hakime1-admin@bitbucket.org/hakime1/configuration.git
-          username: hakime1-admin
-          password: G53WWsKqEpZYSW2PwSc9
+          uri: https://${BUCKET_USER}@bitbucket.org/hakime1/configuration.git
+          username: ${BUCKET_USER}
           clone-on-start: true
+          password: ${BUCKET_TOKEN}
 
 server:
   port: 8181
