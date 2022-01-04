@@ -1,0 +1,10 @@
+server:
+  port: 8383
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8282/eureka/
+    fetchRegistry: true
