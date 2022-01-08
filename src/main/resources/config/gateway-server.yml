@@ -6,5 +6,39 @@ eureka:
   client:
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8282/eureka/
+      defaultZone: http://localhost:8761/eureka
     fetchRegistry: true
+# https://cloud.spring.io/spring-cloud-gateway/reference/html/
+# https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.3.RELEASE/single/spring-cloud-gateway.html
+spring:
+  cloud:
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+      routes:
+        id: organization-service
+        uri: lb://organization-service
+        predicates:
+          Path=/organization/**
+        filters:
+          RewritePath=/organization/(?<path>.*),/$\{path}
+
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: ingredients
+#          uri: lb://ingredients
+#          predicates:
+#            - Path=//ingredients/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: fetchIngredients
+#                fallbackUri: forward:/fallback
+#        - id: ingredients-fallback
+#          uri: http://localhost:9994
+#          predicates:
+#            - Path=/fallback
