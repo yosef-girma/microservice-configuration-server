@@ -12,17 +12,24 @@ eureka:
 # https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.1.3.RELEASE/single/spring-cloud-gateway.html
 spring:
   cloud:
+    loadbalancer.ribbon.enabled: false
     gateway:
       discovery.locator:
         enabled: true
         lowerCaseServiceId: true
       routes:
-        id: organization-service
-        uri: lb://organization-service
-        predicates:
-          Path=/organization/**
-        filters:
-          RewritePath=/organization/(?<path>.*),/$\{path}
+        - id: organization-service
+          uri: lb://organization-service
+          predicates:
+            - Path=/organization/**
+          filters:
+            - RewritePath=/organization/(?<path>.*), /$\{path}
+        - id: licensing-service
+          uri: lb://licensing-service
+          predicates:
+            - Path=/license/**
+          filters:
+            - RewritePath=/license/(?<path>.*), /$\{path}
 
 
 #spring:
